@@ -10,8 +10,7 @@ services:
     container_name: traefik
     hostname: traefik
     ports:
-      - "80:80"
-      - "443:443"
+      - "442:443"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - ${CONFIG}/traefik/acme.json:/acme.json
@@ -35,58 +34,38 @@ services:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
-  ddclient:
-    image: linuxserver/ddclient
-    container_name: ddclient
-    volumes:
-      - ${CONFIG}/ddclient:/config
-    labels:
-      com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
-
-  sabnzbd:
-    image: linuxserver/sabnzbd:latest
-    container_name: sabnzbd
-    hostname: sabnzbd
+  nzbget:
+    image: linuxserver/nzbget:latest
+    container_name: nzbget
+    hostname: nzbget
     ports:
-      - "8080:8080"
+      - "6789:6789"
     volumes:
-      - ${CONFIG}/sabnzbd:/config
-      - ${DOWNLOAD}/complete:/downloads
-      - ${DOWNLOAD}/incomplete:/incomplete-downloads
-      - ${DOWNLOAD}/watch:/watch
+      - ${CONFIG}/nzbget:/config
+      - ${MEDIA}/downloads/nzbget:/media/downloads/nzbget
     environment:
       - PGID
       - PUID
       - TZ
     labels:
-      traefik.enable: "true"
-      traefik.port: "8080"
-      traefik.frontend.rule: "Host:sabnzbd.${DOMAIN}"
-      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
   sonarr:
-    image: linuxserver/sonarr:latest
+    image: lsiodev/sonarr-preview
     container_name: sonarr
     hostname: sonarr
     ports:
       - "8989:8989"
     volumes:
       - ${CONFIG}/sonarr:/config
-      - ${DOWNLOAD}/complete:/downloads
-      - ${DATA}/tv:/tv
-      - ${DATA}/anime:/anime
+      - ${MEDIA}/downloads:/media/downloads
+      - ${MEDIA}/tv:/media/tv
     environment:
       - PGID
       - PUID
       - TZ
     labels:
-      traefik.enable: "true"
-      traefik.port: "8989"
-      traefik.frontend.rule: "Host:sonarr.${DOMAIN}"
-      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -98,83 +77,13 @@ services:
       - "7878:7878"
     volumes:
       - ${CONFIG}/radarr:/config
-      - ${DOWNLOAD}/complete:/downloads
-      - ${DATA}/movies:/movies
+      - ${MEDIA}/downloads:/media/downloads
+      - ${MEDIA}/movies:/media/movies
     environment:
       - PGID
       - PUID
       - TZ
     labels:
-      traefik.enable: "true"
-      traefik.port: "7878"
-      traefik.frontend.rule: "Host:radarr.${DOMAIN}"
-      traefik.frontend.auth.basic: "${HTPASSWD}"
-      com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
-
-  lidarr:
-    image: linuxserver/lidarr:latest
-    container_name: lidarr
-    hostname: lidarr
-    ports:
-      - "8686:8686"
-    volumes:
-      - ${CONFIG}/lidarr:/config
-      - /etc/localtime:/etc/localtime:ro
-      - ${DOWNLOAD}/complete:/downloads
-      - ${DATA}/music:/music
-    environment:
-      - PGID
-      - PUID
-    labels:
-      traefik.enable: "true"
-      traefik.port: "8686"
-      traefik.frontend.rule: "Host:lidarr.${DOMAIN}"
-      traefik.frontend.auth.basic: "${HTPASSWD}"
-      com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
-
-  lazylibrarian:
-    image: linuxserver/lazylibrarian:latest
-    container_name: lazylibrarian
-    hostname: lazylibrarian
-    ports:
-      - "5299:5299"
-    volumes:
-      - ${CONFIG}/lazylibrarian:/config
-      - ${DOWNLOAD}/complete:/downloads
-      - ${DATA}/books:/books
-    environment:
-      - PGID
-      - PUID
-      - TZ
-    labels:
-      traefik.enable: "true"
-      traefik.port: "5299"
-      traefik.frontend.rule: "Host:lazylibrarian.${DOMAIN}"
-      traefik.frontend.auth.basic: "${HTPASSWD}"
-      com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
-
-  mylar:
-    image: linuxserver/mylar:latest
-    container_name: mylar
-    hostname: mylar
-    ports:
-      - "8090:8090"
-    volumes:
-      - ${CONFIG}/mylar:/config
-      - ${DOWNLOAD}/complete:/downloads
-      - ${DATA}/comics:/comics
-    environment:
-      - PGID
-      - PUID
-      - TZ
-    labels:
-      traefik.enable: "true"
-      traefik.port: "8090"
-      traefik.frontend.rule: "Host:mylar.${DOMAIN}"
-      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -186,16 +95,12 @@ services:
       - "5076:5076"
     volumes:
       - ${CONFIG}/nzbhydra2:/config
-      - ${DOWNLOAD}/complete:/downloads
+      - ${MEDIA}/downloads:/media/downloads
     environment:
       - PGID
       - PUID
       - TZ
     labels:
-      traefik.enable: "true"
-      traefik.port: "5076"
-      traefik.frontend.rule: "Host:nzbhydra.${DOMAIN}"
-      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -211,10 +116,10 @@ services:
       - "1900:1900/udp"
     volumes:
       - ${CONFIG}/plex:/config
-      - ${DATA}/tv:/media/tv
-      - ${DATA}/movies:/media/movies
-      - ${DATA}/music:/media/music
-      - ${DATA}/anime:/media/anime
+      - ${MEDIA}/tv:/media/tv
+      - ${MEDIA}/movies:/media/movies
+      - ${MEDIA}/music:/media/music
+      - ${MEDIA}/workouts:/media/workouts
     environment:
       - PGID
       - PUID
@@ -227,42 +132,20 @@ services:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
-  plexpy:
+  tautulli:
     image: linuxserver/tautulli:latest
     container_name: tautulli
     hostname: tautulli
     ports:
       - "8181:8181"
     volumes:
-      - ${CONFIG}/plexpy:/config
+      - ${CONFIG}/tautulli:/config
       - ${CONFIG}/plex/Library/Application Support/Plex Media Server/Logs:/logs:ro
     environment:
       - PGID
       - PUID
       - TZ
     labels:
-      traefik.enable: "true"
-      traefik.port: "8181"
-      traefik.frontend.rule: "Host:tautulli.${DOMAIN}"
-      traefik.frontend.auth.basic: "${HTPASSWD}"
-      com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
-
-  heimdall:
-    image: duhio/heimdall-https:latest
-    container_name: heimdall
-    hostname: heimdall
-    volumes:
-      - ${CONFIG}/heimdall:/config
-    environment:
-      - PGID
-      - PUID
-      - TZ
-    labels:
-      traefik.enable: "true"
-      traefik.port: "80"
-      traefik.frontend.rule: "Host:${DOMAIN}"
-      traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
@@ -281,27 +164,181 @@ services:
     labels:
       traefik.enable: "true"
       traefik.port: "3579"
-      traefik.frontend.rule: "Host:ombi.${DOMAIN}"
+      traefik.frontend.rule: "Host:requests.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
-
-  flexget:
-    image: cpoppema/docker-flexget
-    container_name: flexget
-    hostname: flexget
+    
+  unifi:
+    image: linuxserver/unifi:unstable
+    container_name: unifi
+    hostname: unifi
     ports:
-      - "5050:5050"
+      - "3478:3478"
+      - "10001:10001"
+      - "8080:8080"
+      - "8081:8081"
+      - "8443:8443"
+      - "8843:8843"
+      - "8880:8880"
+      - "6788:6789"
     volumes:
-      - ${CONFIG}/flexget:/config
-      - ${DOWNLOAD}/watch:/watch
+      - ${CONFIG}/unifi:/config
     environment:
       - PGID
       - PUID
-      - WEB_PASSWD=pNTgQj4hfJPPiGVFt9re
+      - TZ
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+    
+  tvheadend:
+    image: linuxserver/tvheadend
+    container_name: tvheadend
+    hostname: tvheadend
+    ports:
+      - "9981:9981"
+      - "9982:9982"
+    volumes:
+      - ${CONFIG}/tvheadend:/config
+      - ${MEDIA}/tvheadend/recordings:/recordings
+      - ${MEDIA}/tvheadend/timeshift:/timeshift
+    environment:
+      - PGID
+      - PUID
+      - TZ
     labels:
       traefik.enable: "true"
-      traefik.port: "5050"
-      traefik.frontend.rule: "Host:flexget.${DOMAIN}"
-      traefik.frontend.auth.basic: "${HTPASSWD}"
+      traefik.port: "9981"
+      traefik.frontend.rule: "Host:tv.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  bitwarden:
+    image: mprasil/bitwarden
+    container_name: bitwarden
+    hostname: bitwarden
+    ports:
+      - "8343:80"
+    volumes:
+      - ${CONFIG}/bitwarden:/data
+    environment:
+      - PGID
+      - PUID
+      - TZ
+    labels:
+      traefik.enable: "true"
+      traefik.port: "80"
+      traefik.frontend.rule: "Host:passwords.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+    
+  beets:
+    image: linuxserver/beets
+    container_name: beets
+    hostname: beets
+    ports:
+      - "8337:8337"
+    volumes:
+      - ${CONFIG}/beets:/config
+      - ${MEDIA}/music:/media/music
+    environment:
+      - PGID
+      - PUID
+      - TZ
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+    
+  radicale:
+    image: tomsquest/docker-radicale
+    container_name: radicale
+    hostname: radicale
+    ports:
+      - "5232:5232"
+    volumes:
+      - ${CONFIG}/radicale/config:/config
+      - ${CONFIG}/radicale/data:/data
+    labels:
+      traefik.enable: "true"
+      traefik.port: "5232"
+      traefik.frontend.rule: "Host:dav.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+    
+  seafile:
+    image: foxel/seafile
+    container_name: seafile
+    hostname: seafile
+    ports:
+      - "9080:80"
+    volumes:
+      - ${SEAFILE}:/seafile
+    environment:
+      SEAFILE_URL: 'https://seafile.peakconsults.com'
+    links:
+      - mysql
+    labels:
+      traefik.enable: "true"
+      traefik.port: "80"
+      traefik.frontend.rule: "Host:seafile.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  mysql:
+    image: mysql
+    container_name: mysql
+    hostname: mysql
+    volumes:
+      - ${CONFIG}/mysql:/var/lib/mysql
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: 1
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
+
+  transmission:
+    image: haugene/transmission-openvpn
+    container_name: transmission
+    hostname: transmission
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun
+    ports:
+      - "9091:9091"
+      - "8888:8888"
+    dns:
+      - 1.1.1.1                                                                                              
+      - 1.0.0.1                                                                                              
+    volumes:                                                                                                 
+      - ${CONFIG}/transmission:/config
+      - ${MEDIA}/downloads/transmission:/data                                                                 
+    environment:                                                                                             
+      - OPENVPN_PROVIDER=${OVPNSERVER}                                                                        
+      - OPENVPN_USERNAME=${OVPNUSER}
+      - OPENVPN_PASSWORD=${OVPNPASS}
+      - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60 --mssfix 1450
+      - LOCAL_NETWORK=10.0.14.0/24
+      - OPENVPN_CONFIG=${OVPNCONFIG}
+      - WEBPROXY_ENABLED=true
+      - PGID
+      - PUID
+      - TZ
+    labels:
+      com.centurylinklabs.watchtower.enable: "true"                                                          
+    restart: unless-stopped                                                                                  
+
+  transmission-rss:
+    image: haugene/transmission-rss                                                                          
+    container_name: transmission-rss
+    hostname: transmission-rss
+    links:
+      - transmission
+    environment:
+      - RSS_URL=<URL>
+      - PGID
+      - PUID                                                                                                 
+      - TZ
+    labels:                                                                                                  
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
