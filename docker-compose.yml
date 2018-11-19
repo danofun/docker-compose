@@ -125,6 +125,8 @@ services:
       - PUID
       - TZ
       - VERSION=latest
+    devices:
+      - /dev/dri:/dev/dri
     labels:
       traefik.enable: "true"
       traefik.port: "32400"
