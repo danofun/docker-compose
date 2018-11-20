@@ -344,3 +344,21 @@ services:
     labels:                                                                                                  
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
+    
+  onlyoffice:
+    image: onlyoffice/documentserver
+    container_name: onlyoffice
+    hostname: onlyoffice
+    ports:
+      - "9081:80"
+    volumes:
+      - ${CONFIG}/onlyoffice:/var/log/onlyoffice
+      - ${CONFIG}/onlyoffice:/var/www/onlyoffice/Data
+      - ${CONFIG}/onlyoffice:/var/lib/onlyoffice
+      - ${CONFIG}/onlyoffice:/var/lib/postgresql
+    labels:
+      traefik.enable: "true"
+      traefik.port: "80"
+      traefik.frontend.rule: "Host:office.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: unless-stopped
