@@ -22,7 +22,7 @@ services:
       traefik.port: "8080"
       traefik.frontend.auth.basic: "${HTPASSWD}"
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
 
   watchtower:
     image: v2tec/watchtower:latest
@@ -32,7 +32,7 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
 
   nzbget:
     image: linuxserver/nzbget:latest
@@ -49,7 +49,7 @@ services:
       - TZ
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
 
   sonarr:
     image: lsiodev/sonarr-preview
@@ -67,7 +67,7 @@ services:
       - TZ
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
 
   radarr:
     image: linuxserver/radarr:latest
@@ -85,7 +85,7 @@ services:
       - TZ
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
 
   nzbhydra:
     image: linuxserver/hydra2:latest
@@ -102,7 +102,7 @@ services:
       - TZ
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
 
   plex:
     image: linuxserver/plex
@@ -132,7 +132,7 @@ services:
       traefik.port: "32400"
       traefik.frontend.rule: "Host:plex.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
 
   tautulli:
     image: linuxserver/tautulli:latest
@@ -149,7 +149,7 @@ services:
       - TZ
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
 
   ombi:
     image: linuxserver/ombi
@@ -168,7 +168,7 @@ services:
       traefik.port: "3579"
       traefik.frontend.rule: "Host:requests.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
     
   unifi:
     image: linuxserver/unifi:unstable
@@ -191,7 +191,7 @@ services:
       - TZ
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
     
   tvheadend:
     image: linuxserver/tvheadend
@@ -213,7 +213,7 @@ services:
       traefik.port: "9981"
       traefik.frontend.rule: "Host:tv.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
 
   bitwarden:
     image: mprasil/bitwarden
@@ -232,7 +232,7 @@ services:
       traefik.port: "80"
       traefik.frontend.rule: "Host:passwords.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
     
   beets:
     image: linuxserver/beets
@@ -249,7 +249,7 @@ services:
       - TZ
     labels:
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
     
   radicale:
     image: tomsquest/docker-radicale
@@ -265,7 +265,7 @@ services:
       traefik.port: "5232"
       traefik.frontend.rule: "Host:dav.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
     
   seafile:
     image: seafileltd/seafile:latest
@@ -284,7 +284,7 @@ services:
       traefik.port: "80"
       traefik.frontend.rule: "Host:seafile.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
 
   transmission:
     image: haugene/transmission-openvpn
@@ -316,7 +316,7 @@ services:
       - TZ
     labels:
       com.centurylinklabs.watchtower.enable: "true"                                                          
-    restart: unless-stopped                                                                                  
+    restart: always                                                                                  
 
   transmission-rss:
     image: haugene/transmission-rss                                                                          
@@ -331,7 +331,7 @@ services:
       - TZ
     labels:                                                                                                  
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
     
   onlyoffice:
     image: onlyoffice/documentserver
@@ -349,4 +349,4 @@ services:
       traefik.port: "80"
       traefik.frontend.rule: "Host:office.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
+    restart: always
