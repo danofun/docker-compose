@@ -276,10 +276,7 @@ services:
     volumes:
       - ${CONFIG}/seafile/db:/shared/db
       - ${CONFIG}/seafile/logs:/shared/logs
-      - ${CONFIG}/seafile/seafile/ccnet:/shared/seafile/ccnet
-      - ${CONFIG}/seafile/seafile/conf:/shared/seafile/conf
-      - ${CONFIG}/seafile/seafile/seahub-data:/shared/seafile/seahub-data
-      - ${SEAFILE}:/shared/seafile/seafile-data      
+      - ${SEAFILE}:/shared/seafile      
     environment:
       SEAFILE_SERVER_HOSTNAME: 'https://seafile.peakconsults.com'
     labels:
