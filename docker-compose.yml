@@ -268,33 +268,21 @@ services:
     restart: unless-stopped
     
   seafile:
-    image: foxel/seafile
+    image: seafileltd/seafile:latest
     container_name: seafile
     hostname: seafile
     ports:
       - "9080:80"
     volumes:
-      - ${SEAFILE}:/seafile
+      - ${CONFIG}/seafile/db:/shared/db
+      - ${CONFIG}/seafile/logs:/shared/logs
+      - ${SEAFILE}:/shared/seafile      
     environment:
-      SEAFILE_URL: 'https://seafile.peakconsults.com'
-    links:
-      - mysql
+      SEAFILE_SERVER_HOSTNAME: 'https://seafile.peakconsults.com'
     labels:
       traefik.enable: "true"
       traefik.port: "80"
       traefik.frontend.rule: "Host:seafile.${DOMAIN}"
-      com.centurylinklabs.watchtower.enable: "true"
-    restart: unless-stopped
-
-  mysql:
-    image: mysql
-    container_name: mysql
-    hostname: mysql
-    volumes:
-      - ${CONFIG}/mysql:/var/lib/mysql
-    environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: 1
-    labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: unless-stopped
 
