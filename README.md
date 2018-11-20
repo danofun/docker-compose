@@ -21,6 +21,7 @@ An automated Usenet pipeline with reverse proxy and auto-updating of services, p
 - [seafile](https://hub.docker.com/r/foxel/seafile/~/dockerfile/)
 - [transmission](https://hub.docker.com/r/haugene/transmission-openvpn/)
 - [transmission-rss](https://hub.docker.com/r/haugene/transmission-rss/)
+- [OnlyOffice](https://hub.docker.com/r/onlyoffice/documentserver/)
 
 ## Requirements
 
@@ -57,7 +58,7 @@ Values for User ID (PUID) and Group ID (PGID) can be found by running `id user` 
 
 ### Running
 
-In the directory containing the files, run `docker-compose up -d`. Each service should be accessible (assuming you have port-forwarded on your router) on `<service-name>.<your-domain>`. Heimdall should be accessible on `<your-domain>`, from where you can set it up to provide a convenient homepage with links to services. The Traefik dashboard should be accessible on `monitor.<your-domain>`.
+In the directory containing the files, run `docker-compose up -d`. Designated services should be accessible (assuming you have port-forwarded on your router) on `<service-name>.<your-domain>`. The Traefik dashboard should be accessible on `monitor.<your-domain>`.
 
 #### Service Configuration
 
@@ -118,7 +119,5 @@ By default, UnRAID will not persist user-defined Docker networks such as the one
 You'll need to either change the HTTPS port specified for the UnRAID WebUI (in _Settings_ -> _Identification_) or change the host port on the Traefik container to something other than 443 and forward 443 to that port on your router (eg 443 on router forwarded to 444 on Docker host) in order to allow Traefik to work properly.
 
 ## Help / Contributing
-
-If you need assistance, please file an issue. Please do read the [existing closed issues](https://github.com/duhio/docker-compose-usenet/issues?q=is%3Aissue+is%3Aclosed) as they may contain the answer to your question.
 
 Pull requests for bugfixes/improvements are very much welcomed. As are suggestions of new/replacement services.
