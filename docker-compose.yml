@@ -340,10 +340,10 @@ services:
     ports:
       - "9081:80"
     volumes:
-      - ${CONFIG}/onlyoffice:/var/log/onlyoffice
-      - ${CONFIG}/onlyoffice:/var/www/onlyoffice/Data
-      - ${CONFIG}/onlyoffice:/var/lib/onlyoffice
-      - ${CONFIG}/onlyoffice:/var/lib/postgresql
+      - ${CONFIG}/onlyoffice/logs:/var/log/onlyoffice
+      - ${CONFIG}/onlyoffice/data:/var/www/onlyoffice/Data
+      - ${CONFIG}/onlyoffice/lib:/var/lib/onlyoffice
+      - ${CONFIG}/onlyoffice/db:/var/lib/postgresql
     labels:
       traefik.enable: "true"
       traefik.port: "80"
