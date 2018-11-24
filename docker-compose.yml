@@ -126,7 +126,7 @@ services:
       - ${MEDIA}/workouts:/media/workouts
     environment:
       - PLEX_CLAIM=${PLEXCLAIM}
-      - ADVERTISE_IP=http://10.0.14.5:32400/
+      - ADVERTISE_IP=${PLEXADDRESS}
       - PGID=${PGID}
       - PUID=${PUID}
       - TZ=${TZ}
