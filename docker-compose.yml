@@ -286,31 +286,30 @@ services:
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
 
-  transmission:
-    image: haugene/transmission-openvpn
-    container_name: transmission
-    hostname: transmission
-    cap_add:
-      - NET_ADMIN
-    devices:
-      - /dev/net/tun
+  deluge:
+    image: binhex/arch-delugevpn
+    container_name: deluge
+    hostname: deluge
     ports:
-      - "9091:9091"
-      - "8888:8888"
-    dns:
-      - 1.1.1.1                                                                                              
-      - 1.0.0.1                                                                                              
+      - "8112:8112/tcp"
+      - "58846:58846/tcp"
+      - "58946:58946/tcp"
+      - "58946:58946/udp"
+      - "8118:8118/tcp"
     volumes:                                                                                                 
-      - ${CONFIG}/transmission:/config
-      - ${MEDIA}/downloads/transmission:/data                                                                 
+      - ${CONFIG}/deluge:/config
+      - ${MEDIA}/downloads/deluge:/data                                                                 
     environment:                                                                                             
-      - OPENVPN_PROVIDER=${OVPNSERVER}                                                                        
-      - OPENVPN_USERNAME=${OVPNUSER}
-      - OPENVPN_PASSWORD=${OVPNPASS}
-      - OPENVPN_OPTS=--inactive 3600 --ping 10 --ping-exit 60 --mssfix 1450
-      - LOCAL_NETWORK=10.0.14.0/24
-      - OPENVPN_CONFIG=${OVPNCONFIG}
-      - WEBPROXY_ENABLED=true
+      - VPN_ENABLED=yes                                                                       
+      - VPN_USER=${OVPNUSER}
+      - VPN_PASS=${OVPNPASS}
+      - VPN_PROV=custom
+      - VPN_OPTIONS=
+      - STRICT_PORT_FORWARD=yes
+      - ENABLE_PRIVOXY=yes
+      - LAN_NETWORK=10.0.14.0/24
+      - NAME_SERVERS=209.222.18.222,37.235.1.174,1.1.1.1,8.8.8.8,209.222.18.218,37.235.1.177,1.0.0.1,8.8.4.4
+      - UMASK=000
       - PGID
       - PUID
       - TZ
@@ -318,21 +317,6 @@ services:
       com.centurylinklabs.watchtower.enable: "true"                                                          
     restart: always                                                                                  
 
-  transmission-rss:
-    image: haugene/transmission-rss                                                                          
-    container_name: transmission-rss
-    hostname: transmission-rss
-    links:
-      - transmission
-    environment:
-      - RSS_URL=<URL>
-      - PGID
-      - PUID                                                                                                 
-      - TZ
-    labels:                                                                                                  
-      com.centurylinklabs.watchtower.enable: "true"
-    restart: always
-    
   onlyoffice:
     image: onlyoffice/documentserver
     container_name: onlyoffice
