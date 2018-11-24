@@ -104,7 +104,7 @@ services:
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
 
-    plex:
+  plex:
     image: plexinc/pms-docker
     container_name: plex
     hostname: plex
