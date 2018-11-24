@@ -105,10 +105,15 @@ services:
     restart: always
 
   plex:
-    image: plexinc/pms-docker
+    image: linuxserver/plex
     container_name: plex
     hostname: plex
-    network_mode: host
+    ports:
+      - "32400:32400"
+      - "32400:32400/udp"
+      - "32469:32469"
+      - "32469:32469/udp"
+      - "1900:1900/udp"
     volumes:
       - ${CONFIG}/plex:/config
       - ${MEDIA}/tv:/media/tv
@@ -116,10 +121,10 @@ services:
       - ${MEDIA}/music:/media/music
       - ${MEDIA}/workouts:/media/workouts
     environment:
-      - PLEX_CLAIM=${PLEXCLAIM}
       - PGID=${PGID}
       - PUID=${PUID}
       - TZ=${TZ}
+      - VERSION=latest
     devices:
       - /dev/dri:/dev/dri
     labels:
