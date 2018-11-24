@@ -44,9 +44,9 @@ services:
       - ${CONFIG}/nzbget:/config
       - ${MEDIA}/downloads/nzbget:/media/downloads/nzbget
     environment:
-      - PGID
-      - PUID
-      - TZ
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
@@ -62,9 +62,9 @@ services:
       - ${MEDIA}/downloads:/media/downloads
       - ${MEDIA}/tv:/media/tv
     environment:
-      - PGID
-      - PUID
-      - TZ
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
@@ -80,9 +80,9 @@ services:
       - ${MEDIA}/downloads:/media/downloads
       - ${MEDIA}/movies:/media/movies
     environment:
-      - PGID
-      - PUID
-      - TZ
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
@@ -97,9 +97,9 @@ services:
       - ${CONFIG}/nzbhydra2:/config
       - ${MEDIA}/downloads:/media/downloads
     environment:
-      - PGID
-      - PUID
-      - TZ
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
@@ -121,9 +121,9 @@ services:
       - ${MEDIA}/music:/media/music
       - ${MEDIA}/workouts:/media/workouts
     environment:
-      - PGID
-      - PUID
-      - TZ
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
       - VERSION=latest
     devices:
       - /dev/dri:/dev/dri
@@ -144,9 +144,9 @@ services:
       - ${CONFIG}/tautulli:/config
       - ${CONFIG}/plex/Library/Application Support/Plex Media Server/Logs:/logs:ro
     environment:
-      - PGID
-      - PUID
-      - TZ
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
@@ -160,9 +160,9 @@ services:
     volumes:
       - ${CONFIG}/ombi:/config
     environment:
-      - PGID
-      - PUID
-      - TZ
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
     labels:
       traefik.enable: "true"
       traefik.port: "3579"
@@ -186,9 +186,9 @@ services:
     volumes:
       - ${CONFIG}/unifi:/config
     environment:
-      - PGID
-      - PUID
-      - TZ
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
@@ -205,9 +205,9 @@ services:
       - ${MEDIA}/tvheadend/recordings:/recordings
       - ${MEDIA}/tvheadend/timeshift:/timeshift
     environment:
-      - PGID
-      - PUID
-      - TZ
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
     labels:
       traefik.enable: "true"
       traefik.port: "9981"
@@ -224,9 +224,9 @@ services:
     volumes:
       - ${CONFIG}/bitwarden:/data
     environment:
-      - PGID
-      - PUID
-      - TZ
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
     labels:
       traefik.enable: "true"
       traefik.port: "80"
@@ -244,9 +244,9 @@ services:
       - ${CONFIG}/beets:/config
       - ${MEDIA}/music:/media/music
     environment:
-      - PGID
-      - PUID
-      - TZ
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
     labels:
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
@@ -260,6 +260,10 @@ services:
     volumes:
       - ${CONFIG}/radicale/config:/config
       - ${CONFIG}/radicale/data:/data
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ
     labels:
       traefik.enable: "true"
       traefik.port: "5232"
@@ -312,9 +316,9 @@ services:
       - NAME_SERVERS=209.222.18.222,37.235.1.174,1.1.1.1,8.8.8.8,209.222.18.218,37.235.1.177,1.0.0.1,8.8.4.4
       - DEBUG=false
       - UMASK=000
-      - PGID
-      - PUID
-      - TZ
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
     labels:
       com.centurylinklabs.watchtower.enable: "true"                                                          
     restart: always                                                                                  
@@ -330,6 +334,10 @@ services:
       - ${CONFIG}/onlyoffice/data:/var/www/onlyoffice/Data
       - ${CONFIG}/onlyoffice/lib:/var/lib/onlyoffice
       - ${CONFIG}/onlyoffice/db:/var/lib/postgresql
+    environment:
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ
     labels:
       traefik.enable: "true"
       traefik.port: "80"
