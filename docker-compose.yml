@@ -290,12 +290,13 @@ services:
     image: binhex/arch-delugevpn
     container_name: deluge
     hostname: deluge
+    cap_add:
+      - NET_ADMIN
     ports:
-      - "8112:8112/tcp"
-      - "58846:58846/tcp"
-      - "58946:58946/tcp"
-      - "58946:58946/udp"
-      - "8118:8118/tcp"
+      - "8112:8112"
+      - "58846:58846"
+      - "58946:58946"
+      - "8118:8118"
     volumes:                                                                                                 
       - ${CONFIG}/deluge:/config
       - ${MEDIA}/downloads/deluge:/data                                                                 
@@ -309,6 +310,7 @@ services:
       - ENABLE_PRIVOXY=yes
       - LAN_NETWORK=10.0.14.0/24
       - NAME_SERVERS=209.222.18.222,37.235.1.174,1.1.1.1,8.8.8.8,209.222.18.218,37.235.1.177,1.0.0.1,8.8.4.4
+      - DEBUG=false
       - UMASK=000
       - PGID
       - PUID
