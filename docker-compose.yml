@@ -43,6 +43,9 @@ services:
     volumes:
       - ${CONFIG}/nzbget:/config
       - ${MEDIA}/downloads/nzbget:/media/downloads/nzbget
+      - ${MEDIA}/music/unsorted:/media/music/unsorted
+      - ${MEDIA}/apps:/media/apps
+      - ${MEDIA}/games/PC/ISO:/media/games/PC/ISO
     environment:
       - PGID=${PGID}
       - PUID=${PUID}
