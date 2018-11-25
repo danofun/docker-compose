@@ -132,8 +132,6 @@ services:
       - /dev/dri:/dev/dri
     labels:
       traefik.enable: "true"
-      traefik.port: "32400"
-      traefik.frontend.rule: "Host:plex.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
 
@@ -168,7 +166,6 @@ services:
       - TZ=${TZ}
     labels:
       traefik.enable: "true"
-      traefik.port: "3579"
       traefik.frontend.rule: "Host:requests.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
@@ -213,7 +210,6 @@ services:
       - TZ=${TZ}
     labels:
       traefik.enable: "true"
-      traefik.port: "9981"
       traefik.frontend.rule: "Host:tv.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
@@ -232,7 +228,6 @@ services:
       - TZ=${TZ}
     labels:
       traefik.enable: "true"
-      traefik.port: "80"
       traefik.frontend.rule: "Host:passwords.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
@@ -269,7 +264,6 @@ services:
       - TZ=${TZ}
     labels:
       traefik.enable: "true"
-      traefik.port: "5232"
       traefik.frontend.rule: "Host:dav.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
@@ -288,8 +282,6 @@ services:
       SEAFILE_SERVER_HOSTNAME: 'https://seafile.peakconsults.com'
     labels:
       traefik.enable: "true"
-      traefik.port: "80"
-      traefik.frontend.rule: "Host:seafile.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
 
@@ -343,7 +335,6 @@ services:
       - TZ=${TZ}
     labels:
       traefik.enable: "true"
-      traefik.port: "80"
       traefik.frontend.rule: "Host:office.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always

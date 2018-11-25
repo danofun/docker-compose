@@ -16,11 +16,9 @@ An automated Usenet pipeline with reverse proxy and auto-updating of services, p
 - [TVheadend](https://hub.docker.com/r/linuxserver/tvheadend/)
 - [Bitwarden](https://hub.docker.com/r/mprasil/bitwarden/)
 - [Beets](https://hub.docker.com/r/linuxserver/beets/)
-- [mysql](https://hub.docker.com/_/mysql/)
 - [radicale](https://hub.docker.com/r/tomsquest/docker-radicale/)
 - [seafile](https://hub.docker.com/r/foxel/seafile/~/dockerfile/)
-- [transmission](https://hub.docker.com/r/haugene/transmission-openvpn/)
-- [transmission-rss](https://hub.docker.com/r/haugene/transmission-rss/)
+- [deluge](https://hub.docker.com/r/binhex/arch-delugevpn/)
 - [OnlyOffice](https://hub.docker.com/r/onlyoffice/documentserver/)
 
 ## Requirements
