@@ -132,6 +132,7 @@ services:
       - /dev/dri:/dev/dri
     labels:
       traefik.enable: "true"
+      traefik.port: "32400"
       traefik.frontend.rule: "Host:plex.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
