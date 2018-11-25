@@ -35,7 +35,7 @@ services:
     restart: always
 
   nzbget:
-    image: linuxserver/nzbget:latest
+    image: danofun/nzbget
     container_name: nzbget
     hostname: nzbget
     ports:
