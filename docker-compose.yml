@@ -132,6 +132,7 @@ services:
       - /dev/dri:/dev/dri
     labels:
       traefik.enable: "true"
+      traefik.frontend.rule: "Host:plex.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
 
@@ -282,6 +283,7 @@ services:
       SEAFILE_SERVER_HOSTNAME: 'https://seafile.peakconsults.com'
     labels:
       traefik.enable: "true"
+      traefik.frontend.rule: "Host:seafile.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
 
