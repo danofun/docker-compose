@@ -342,7 +342,7 @@ services:
       - PUID=${PUID}
       - TZ=${TZ}
     labels:
-      com.centurylinklabs.watchtower.enable: "true"
+      traefik.enable: "true"
       traefik.frontend.rule: "Host:office.${DOMAIN}"
       traefik.port: "80"
       com.centurylinklabs.watchtower.enable: "true"
