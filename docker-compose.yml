@@ -326,28 +326,6 @@ services:
       com.centurylinklabs.watchtower.enable: "true"                                                          
     restart: always                                                                                  
 
-  onlyoffice:
-    image: onlyoffice/documentserver
-    container_name: onlyoffice
-    hostname: onlyoffice
-    ports:
-      - "9081:80"
-    volumes:
-      - ${CONFIG}/onlyoffice/logs:/var/log/onlyoffice
-      - ${CONFIG}/onlyoffice/data:/var/www/onlyoffice/Data
-      - ${CONFIG}/onlyoffice/lib:/var/lib/onlyoffice
-      - ${CONFIG}/onlyoffice/db:/var/lib/postgresql
-    environment:
-      - PGID=${PGID}
-      - PUID=${PUID}
-      - TZ=${TZ}
-    labels:
-      traefik.enable: "true"
-      traefik.frontend.rule: "Host:office.${DOMAIN}"
-      traefik.port: "80"
-      com.centurylinklabs.watchtower.enable: "true"
-    restart: always
-
   fxsync:
     image: mozilla/syncserver:latest
     container_name: fxsync
@@ -371,3 +349,23 @@ services:
       traefik.frontend.rule: "Host:fxsync.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
+    
+  collabora:
+    image: collabora/code
+    container_name: collabora
+    hostname: collabora
+    ports:
+      - "9980:9980"
+    volumes:
+      - ${CONFIG}/firefox-syncserver:/tmp
+    environment:
+      - domain=office.peakconsults.com
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
+    labels:
+      traefik.enable: "true"
+      traefik.frontend.rule: "Host:office.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: always
+    
