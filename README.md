@@ -20,6 +20,7 @@ An automated Usenet pipeline with reverse proxy and auto-updating of services, p
 - [seafile](https://hub.docker.com/r/foxel/seafile/~/dockerfile/)
 - [deluge](https://hub.docker.com/r/binhex/arch-delugevpn/)
 - [OnlyOffice](https://hub.docker.com/r/onlyoffice/documentserver/)
+- [Firefox SyncServer](https://hub.docker.com/r/mozilla/syncserver/)
 
 ## Requirements
 
@@ -38,6 +39,7 @@ Using `example.env`, create a file called `.env` (in the directory you cloned th
 | CONFIG           | Where the configs for services will live. Each service will have a subdirectory here      |
 | MEDIA            | Where your data is stored and where sub-directories for tv, movies, etc will be put       |
 | SEAFILE          | Path to your seafile data folder                                                          |
+| FXSECRET         | FIrefox SyncServer secret                                                                 |
 | OVPNSERVER       | The OpenVPN server used by Transmission. [List here.](https://git.io/fpC92)               |
 | OVPNUSER         | The OpenVPN server's username used by Transmission.                                       |      
 | OVPNPASS         | The OpenVPN server's password used by Transmission.                                       |

@@ -151,6 +151,8 @@ services:
       - PUID=${PUID}
       - TZ=${TZ}
     labels:
+      traefik.enable: "true"
+      traefik.frontend.rule: "Host:seafile.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
 
@@ -339,5 +341,28 @@ services:
     labels:
       traefik.enable: "true"
       traefik.frontend.rule: "Host:office.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
+    restart: always
+
+  fxsync:
+    image: mozilla/syncserver:latest
+    container_name: fxsync
+    hostname: fxsync
+    ports:
+      - "4500:4500"
+    volumes:
+      - ${CONFIG}/firefox-syncserver:/tmp
+    environment:
+      - SYNCSERVER_PUBLIC_URL=https://fxsync.${DOMAIN}
+      - SYNCSERVER_SECRET=${FXSECRET}
+      - SYNCSERVER_SQLURI=sqlite:////tmp/syncserver.db
+      - SYNCSERVER_BATCH_UPLOAD_ENABLED=true
+      - SYNCSERVER_FORCE_WSGI_ENVIRON=false
+      - PGID=${PGID}
+      - PUID=${PUID}
+      - TZ=${TZ}
+    labels:
+      traefik.enable: "true"
+      traefik.frontend.rule: "Host:fxsync.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
