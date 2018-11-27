@@ -354,12 +354,14 @@ services:
     image: collabora/code
     container_name: collabora
     hostname: collabora
+    cap_add:
+    - MKNOD
     ports:
       - "9980:9980"
     volumes:
       - ${CONFIG}/firefox-syncserver:/tmp
     environment:
-      - domain=office.peakconsults.com
+      - domain=peakconsults\.com
       - PGID=${PGID}
       - PUID=${PUID}
       - TZ=${TZ}
