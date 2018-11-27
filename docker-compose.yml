@@ -343,6 +343,8 @@ services:
       - TZ=${TZ}
     labels:
       com.centurylinklabs.watchtower.enable: "true"
+      traefik.frontend.rule: "Host:office.${DOMAIN}"
+      com.centurylinklabs.watchtower.enable: "true"
     restart: always
 
   fxsync:
