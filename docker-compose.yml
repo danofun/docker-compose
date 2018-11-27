@@ -361,7 +361,7 @@ services:
     volumes:
       - ${CONFIG}/firefox-syncserver:/tmp
     environment:
-      - domain=peakconsults\.com
+      - domain=office\.peakconsults\.com
       - PGID=${PGID}
       - PUID=${PUID}
       - TZ=${TZ}
