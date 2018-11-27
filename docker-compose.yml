@@ -284,7 +284,7 @@ services:
     volumes:
       - ${CONFIG}/seafile/db:/shared/db
       - ${CONFIG}/seafile/logs:/shared/logs
-       - ${CONFIG}/seafile/nginx:/etc/nginx
+      - ${CONFIG}/seafile/nginx:/etc/nginx
       - ${SEAFILE}:/shared/seafile      
     environment:
       SEAFILE_SERVER_HOSTNAME: 'https://seafile.peakconsults.com'
