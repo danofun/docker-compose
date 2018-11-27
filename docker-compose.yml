@@ -359,7 +359,7 @@ services:
     ports:
       - "9980:9980"
     environment:
-      - domain=seafile\.peakconsults\.com
+      - domain=seafile\\.peakconsults\\.com
       - username=admin
       - password=test1234
       - PGID=${PGID}
