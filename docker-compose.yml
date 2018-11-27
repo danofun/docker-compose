@@ -344,6 +344,7 @@ services:
     labels:
       com.centurylinklabs.watchtower.enable: "true"
       traefik.frontend.rule: "Host:office.${DOMAIN}"
+      traefik.port: "80"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
 
