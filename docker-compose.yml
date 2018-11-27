@@ -367,6 +367,7 @@ services:
       - TZ=${TZ}
     labels:
       traefik.enable: "true"
+      traefik.port: "9980"
       traefik.frontend.rule: "Host:office.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
