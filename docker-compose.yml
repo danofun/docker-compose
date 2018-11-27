@@ -358,10 +358,10 @@ services:
     - MKNOD
     ports:
       - "9980:9980"
-    volumes:
-      - ${CONFIG}/firefox-syncserver:/tmp
     environment:
-      - domain=office\.peakconsults\.com
+      - domain=seafile\.peakconsults\.com
+      - username=admin
+      - password=test1234
       - PGID=${PGID}
       - PUID=${PUID}
       - TZ=${TZ}
@@ -370,4 +370,3 @@ services:
       traefik.frontend.rule: "Host:office.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
-    
