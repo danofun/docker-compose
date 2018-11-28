@@ -335,7 +335,7 @@ services:
     volumes:
       - ${CONFIG}/firefox-syncserver:/tmp
     environment:
-      - SYNCSERVER_PUBLIC_URL=https://fxsync.${DOMAIN}
+      - SYNCSERVER_PUBLIC_URL=http://fxsync.${DOMAIN}
       - SYNCSERVER_SECRET=${FXSECRET}
       - SYNCSERVER_BATCH_UPLOAD_ENABLED=true
       - SYNCSERVER_SQLURI=sqlite:////tmp/syncserver.db
