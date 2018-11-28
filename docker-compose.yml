@@ -364,6 +364,7 @@ services:
       - SYMFONY__ENV__MAILER_USER=${MAILUSER}
       - SYMFONY__ENV__MAILER_PASSWORD=${MAILPASS}
       - SYMFONY__ENV__FROM_EMAIL=postmaster@${DOMAIN}
+      - SYMFONY__ENV__DOMAIN_NAME=https://wallabag.${DOMAIN}
     labels:
       traefik.enable: "true"
       traefik.frontend.rule: "Host:wallabag.${DOMAIN}"
