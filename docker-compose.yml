@@ -349,25 +349,23 @@ services:
       traefik.frontend.rule: "Host:fxsync.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
-    
-  collabora:
-    image: collabora/code
-    container_name: collabora
-    hostname: collabora
-    cap_add:
-    - MKNOD
+
+  wallabag:
+    image: wallabag/wallabag
+    container_name: wallabag
+    hostname: wallabag
     ports:
-      - "9980:9980"
+      - "9081:80"
+    volumes:
+      - ${CONFIG}/wallabag/images:/var/www/wallabag/web/assets/images
+      - ${CONFIG}/wallabag/data:/var/www/wallabag/data
     environment:
-      - domain=seafile\\.peakconsults\\.com
-      - username=admin
-      - password=test1234
-      - PGID=${PGID}
-      - PUID=${PUID}
-      - TZ=${TZ}
+      - SYMFONY__ENV__MAILER_HOST=smtp.mailgun.org
+      - SYMFONY__ENV__MAILER_USER=${MAILUSER}
+      - SYMFONY__ENV__MAILER_PASSWORD=${MAILPASS}
+      - SYMFONY__ENV__FROM_EMAIL=postmaster@${DOMAIN}
     labels:
       traefik.enable: "true"
-      traefik.port: "9980"
-      traefik.frontend.rule: "Host:office.${DOMAIN}"
+      traefik.frontend.rule: "Host:wallabag.${DOMAIN}"
       com.centurylinklabs.watchtower.enable: "true"
     restart: always
