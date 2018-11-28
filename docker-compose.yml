@@ -331,14 +331,14 @@ services:
     container_name: fxsync
     hostname: fxsync
     ports:
-      - "4500:4500"
+      - "5000:5000"
     volumes:
       - ${CONFIG}/firefox-syncserver:/tmp
     environment:
       - SYNCSERVER_PUBLIC_URL=https://fxsync.${DOMAIN}
       - SYNCSERVER_SECRET=${FXSECRET}
-      - SYNCSERVER_SQLURI=sqlite:////tmp/syncserver.db
       - SYNCSERVER_BATCH_UPLOAD_ENABLED=true
+      - SYNCSERVER_SQLURI=sqlite:////tmp/syncserver.db
       - SYNCSERVER_FORCE_WSGI_ENVIRON=false
       - SYNCSERVER_ALLOW_NEW_USER=false
       - PGID=${PGID}
